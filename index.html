@@ -5,29 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>СМТ Великі Бидляки</title>
     <link rel="stylesheet" href="styles.css">
-    <script type="module">
-        // Import the functions you need from the SDKs you need
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
-        import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
-        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-analytics.js";
-
-        // Your web app's Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyBTKnL2bcIhiywAEq-WKjHWBpOF0fmnUKc",
-            authDomain: "budlyki.firebaseapp.com",
-            projectId: "budlyki",
-            storageBucket: "budlyki.firebasestorage.app",
-            messagingSenderId: "238846067099",
-            appId: "1:238846067099:web:978225bd3013aea1aee13e",
-            measurementId: "G-Z9RZN2Q283"
-        };
-
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-        const analytics = getAnalytics(app);
-
-        // Функція для відображення секцій
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
+    <script>
         function showSection(sectionId) {
             const sections = document.querySelectorAll('main > section');
             sections.forEach(section => section.style.display = 'none');
@@ -38,6 +18,20 @@
             showSection('main');
         };
 
+        // Firebase Config
+        const firebaseConfig = {
+            apiKey: "AIzaSyBTKnL2bcIhiywAEq-WKjHWBpOF0fmnUKc",
+            authDomain: "budlyki.firebaseapp.com",
+            projectId: "budlyki",
+            storageBucket: "budlyki.firebasestorage.app",
+            messagingSenderId: "238846067099",
+            appId: "1:238846067099:web:978225bd3013aea1aee13e",
+            measurementId: "G-Z9RZN2Q283"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
         // Реєстрація
         document.getElementById('register-form').addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -46,21 +40,13 @@
             const password = document.getElementById('register-password').value;
             
             try {
-                // Перевірка чи існує вже користувач з таким нікнеймом
-                const userDoc = await getDoc(doc(db, "users", username));
-
-                if (userDoc.exists()) {
-                    alert('Цей нікнейм вже зайнятий!');
-                    return;
-                }
-
-                // Додавання користувача до Firestore
-                await setDoc(doc(db, "users", username), {
+                // Додавання користувача до Firestore (без використання Authentication)
+                await db.collection("users").doc(username).set({
                     username: username,
                     password: password
                 });
                 
-                alert('Користувач зареєстрований успішно!');
+                alert('User registered successfully!');
                 
                 // Переходити на головну після реєстрації
                 showSection('main');
@@ -78,20 +64,20 @@
 
             try {
                 // Отримання користувача за нікнеймом
-                const userDoc = await getDoc(doc(db, "users", username));
+                const userDoc = await db.collection("users").doc(username).get();
 
-                if (userDoc.exists()) {
+                if (userDoc.exists) {
                     const userData = userDoc.data();
 
                     // Перевірка пароля
                     if (userData.password === password) {
-                        alert('Вхід успішний!');
+                        alert('Login successful!');
                         showSection('main');
                     } else {
-                        alert('Невірний пароль!');
+                        alert('Incorrect password!');
                     }
                 } else {
-                    alert('Користувача з таким нікнеймом не знайдено!');
+                    alert('User not found!');
                 }
             } catch (error) {
                 alert(error.message);
@@ -128,7 +114,7 @@
                     <input type="text" id="register-username" required><br><br>
                     <label for="register-password">Password:</label>
                     <input type="password" id="register-password" required><br><br>
-                    <button type="submit">Зареєструватися</button>
+                    <button type="submit">Register</button>
                 </form>
             </div>
         </section>
@@ -142,7 +128,7 @@
                     <input type="text" id="login-username" required><br><br>
                     <label for="login-password">Password:</label>
                     <input type="password" id="login-password" required><br><br>
-                    <button type="submit">Увійти</button>
+                    <button type="submit">Login</button>
                 </form>
             </div>
         </section>
