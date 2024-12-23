@@ -30,12 +30,15 @@
         // Показати потрібну секцію
         function showSection(sectionId) {
             const sections = document.querySelectorAll('main > section');
-            sections.forEach(section => section.style.display = 'none');
-            document.getElementById(sectionId).style.display = 'block';
+            sections.forEach(section => section.style.display = 'none');  // Сховуємо всі секції
+            const activeSection = document.getElementById(sectionId);
+            if (activeSection) {
+                activeSection.style.display = 'block';  // Показуємо вибрану секцію
+            }
         }
 
         window.onload = () => {
-            showSection('main');
+            showSection('main');  // Відразу показуємо головну сторінку при завантаженні
         };
 
         // Реєстрація
@@ -143,22 +146,22 @@
         </section>
 
         <!-- Інші сторінки -->
-        <section id="history">
+        <section id="history" style="display: none;">
             <h2>Історія села Великі Бидляки</h2>
             <p>Великі Бидляки — Селище міського типу в Україні, Звенигородського району Черкаської області. Населення становить 15000 осіб. Голова села - Михайло Лебіга...</p>
         </section>
         
-        <section id="community">
+        <section id="community" style="display: none;">
             <h2>Громада</h2>
             <p>Наша громада складається з активних та відповідальних жителів, які дбають про розвиток селища.</p>
         </section>
 
-        <section id="feedback">
+        <section id="feedback" style="display: none;">
             <h2>Зворотній зв'язок</h2>
             <p>Маєте ідеї або пропозиції? Ми завжди відкриті до діалогу! Залишайте свої повідомлення та побажання.</p>
         </section>
 
-        <section id="news">
+        <section id="news" style="display: none;">
             <h2>Новини</h2>
             <p>Тут будуть публікуватися новини нашого селища.</p>
         </section>
