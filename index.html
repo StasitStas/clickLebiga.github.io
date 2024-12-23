@@ -5,20 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>СМТ Великі Бидляки</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
-    <script>
-        function showSection(sectionId) {
-            const sections = document.querySelectorAll('main > section');
-            sections.forEach(section => section.style.display = 'none');
-            document.getElementById(sectionId).style.display = 'block';
-        }
+    <script type="module">
+        // Імпортуємо функції, необхідні для Firebase
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+        import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-analytics.js";
 
-        window.onload = () => {
-            showSection('main');
-        };
-
-        // Firebase Config
+        // Firebase конфігурація
         const firebaseConfig = {
             apiKey: "AIzaSyBTKnL2bcIhiywAEq-WKjHWBpOF0fmnUKc",
             authDomain: "budlyki.firebaseapp.com",
@@ -29,8 +22,21 @@
             measurementId: "G-Z9RZN2Q283"
         };
 
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
+        // Ініціалізація Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const analytics = getAnalytics(app);
+
+        // Показати потрібну секцію
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('main > section');
+            sections.forEach(section => section.style.display = 'none');
+            document.getElementById(sectionId).style.display = 'block';
+        }
+
+        window.onload = () => {
+            showSection('main');
+        };
 
         // Реєстрація
         document.getElementById('register-form').addEventListener('submit', async (e) => {
@@ -40,18 +46,22 @@
             const password = document.getElementById('register-password').value;
             
             try {
-                // Додавання користувача до Firestore (без використання Authentication)
-                await db.collection("users").doc(username).set({
-                    username: username,
-                    password: password
-                });
+                // Перевіряємо, чи вже існує користувач з таким нікнеймом
+                const userDoc = await getDoc(doc(db, "users", username));
                 
-                alert('User registered successfully!');
-                
-                // Переходити на головну після реєстрації
-                showSection('main');
+                if (userDoc.exists()) {
+                    alert('Цей нікнейм вже зайнятий!');
+                } else {
+                    // Додаємо нового користувача в Firestore
+                    await setDoc(doc(db, "users", username), {
+                        username: username,
+                        password: password
+                    });
+                    alert('Реєстрація успішна!');
+                    showSection('main');
+                }
             } catch (error) {
-                alert(error.message);
+                alert('Помилка при реєстрації: ' + error.message);
             }
         });
 
@@ -63,24 +73,23 @@
             const password = document.getElementById('login-password').value;
 
             try {
-                // Отримання користувача за нікнеймом
-                const userDoc = await db.collection("users").doc(username).get();
+                // Отримуємо користувача за нікнеймом
+                const userDoc = await getDoc(doc(db, "users", username));
 
-                if (userDoc.exists) {
+                if (userDoc.exists()) {
                     const userData = userDoc.data();
-
                     // Перевірка пароля
                     if (userData.password === password) {
-                        alert('Login successful!');
+                        alert('Вхід успішний!');
                         showSection('main');
                     } else {
-                        alert('Incorrect password!');
+                        alert('Невірний пароль!');
                     }
                 } else {
-                    alert('User not found!');
+                    alert('Користувача з таким нікнеймом не існує!');
                 }
             } catch (error) {
-                alert(error.message);
+                alert('Помилка при вході: ' + error.message);
             }
         });
     </script>
@@ -114,7 +123,7 @@
                     <input type="text" id="register-username" required><br><br>
                     <label for="register-password">Password:</label>
                     <input type="password" id="register-password" required><br><br>
-                    <button type="submit">Register</button>
+                    <button type="submit">Зареєструватися</button>
                 </form>
             </div>
         </section>
@@ -128,7 +137,7 @@
                     <input type="text" id="login-username" required><br><br>
                     <label for="login-password">Password:</label>
                     <input type="password" id="login-password" required><br><br>
-                    <button type="submit">Login</button>
+                    <button type="submit">Увійти</button>
                 </form>
             </div>
         </section>
