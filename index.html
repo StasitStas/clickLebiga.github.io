@@ -2,210 +2,152 @@
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Clicker</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="about_styeles.css">
-    <link rel="stylesheet" href="friends_styeles.css">
-    <link rel="stylesheet" href="earn_styeles.css">
-    <link rel="stylesheet" href="drop_styeles.css">
-    <link href="https://cdn.jsdelivr.net/npm/line-awesome/dist/line-awesome/css/line-awesome.min.css" rel="stylesheet">
-</head>
-<body>
-    <div class="container">
-        <div class="header">
-            <span id="usernameDisplay" class="golden-text"></span>
-            <i class="las la-cog cog-icon" id="settingsIcon"></i>
-            <i class="lab la-telegram telegram-icon" id="telegramIcon"></i>
-        </div>
-        <div id="settingsWindow" class="settings-window">
-            <div class="settings-header">
-                <span class="settings-title">Налаштування</span>
-                <div class="close-icon">&times;</div>
-            </div>
-            <div class="settings-toge">
-                <label class="switch-label" id="avatarToggleLabel">
-                    <span>Аватарки</span>
-                    <div class="switch-btn">
-                        <i class="las la-angle-right"></i>
-                    </div>
-                </label>
-                <label class="switch-label">
-                    <span>Анімація</span>
-                    <div class="switch-btn">
-                        <input type="checkbox" id="animationToggle" checked>
-                        <span></span>
-                    </div>
-                </label>
-                <label class="switch-label">
-                    <span>Вібрація</span>
-                    <div class="switch-btn">
-                        <input type="checkbox" id="vibrationToggle" checked>
-                        <span></span>
-                    </div>
-                </label>
-            </div>
-        </div>
-        
-        <div id="avatarWindow" class="avatar-window">
-            <div class="avatar-header">
-                <span class="avatar-title">Аватарки</span>
-                <div class="close-icon">&times;</div>
-            </div>
-            <label class="switch-label" id="avatarTOsettings">
-                <span>Аватарки</span>
-                <div class="switch-btn">
-                    <i class="las la-angle-right"></i>
-                </div>
-            </label>
-            <div id="avatarsContent">
-                <div class="avatar" data-level="0"><img src="ava-img/ava1.jpg" alt="Avatar 1"><span class="lock-text">lvl-1</span></div>
-                <div class="avatar" data-level="2"><img src="ava-img/ava2.jpg" alt="Avatar 2"><span class="lock-text">lvl-2</span></div>
-                <div class="avatar" data-level="4"><img src="ava-img/ava3.jpg" alt="Avatar 3"><span class="lock-text">lvl-3</span></div>
-                <div class="avatar" data-level="5"><img src="ava-img/ava4.jpg" alt="Avatar 4"><span class="lock-text">lvl-6</span></div>
-                <div class="avatar" data-level="7"><img src="ava-img/ava5.jpg" alt="Avatar 5"><span class="lock-text">lvl-7</span></div>
-                <div class="avatar" data-level="8"><img src="ava-img/ava6.jpg" alt="Avatar 6"><span class="lock-text">lvl-8</span></div>
-                <div class="avatar" data-level="9"><img src="ava-img/ava7.jpg" alt="Avatar 7"><span class="lock-text">lvl-9</span></div>
-                <div class="avatar" data-level="10"><img src="ava-img/ava8.jpg" alt="Avatar 8"><span class="lock-text">lvl-10</span></div>
-            </div>
-        </div>
-        <div class="telegram-window" id="telegramWindow">
-            <button id="subscribeButton">Підписатися на канал</button>
-            <button id="bonusButton">Забрати бонус</button>
-        </div> <!-- Нове вікно для телеграм -->
-        <div class="status-bar">
-            <div class="status-item">
-                <span class="status-title">clicks</span>
-                <span class="status-value">+1</span>
-            </div>
-            <div class="status-item">
-                <span class="status-title">top</span>
-                <span id="rank" class="status-value">0</span>
-            </div>
-            <div class="status-item">
-                <span class="status-title">energy</span>
-                <span class="status-value">2000</span>
-            </div>
-        </div>
-        <div class="coin-container">
-            <img src="coin.png" alt="Coin" class="coin-image">
-            <span id="count" class="click-count">0</span>
-        </div>
-        <div>
-            <input type="text" id="username" placeholder="Введіть ваше ім'я" style="display:none;" />
-            <button id="startButton" style="display:none;">Почати</button>
-        </div>
-        <button id="clickButton" class="circle-button">
-            <img src="leb1ga-ment.png" alt="Клікніть мене!">
-        </button>
-        <div id="clickEffectContainer"></div> <!-- Контейнер для анімації натискань -->
-        <!-- Рівень відображення -->
-        <div class="level-bar-container">
-            <div id="levelBar" class="level-bar"></div>
-            <span id="levelTextLeft" class="level-text-left">lvl-0</span>
-            <span id="levelTextRight" class="level-text-right">lvl-1</span>
-        </div>
-        <div id="bottomNav" class="bottom-nav">
-            <button id="exchangeButton" class="nav-button">
-                <i class="las la-exchange-alt"></i>
-                <span>Lebiga</span>
-            </button>
-            <button id="mineButton" class="nav-button">
-                <i class="las la-hammer"></i>
-                <span>Shop</span>
-            </button>
-            <button id="friendsButton" class="nav-button">
-                <i class="las la-user-friends"></i>
-                <span>Friends</span>
-            </button>
-            <button id="earnButton" class="nav-button">
-                <i class="las la-dollar-sign"></i>
-                <span>Earn</span>
-            </button>
-            <button id="airdropButton" class="nav-button">
-                <i class="las la-gift"></i>
-                <span>Global</span>
-            </button>
-        </div>
-    </div>
-    <div id="mineModal" class="modal-mine">
-        <div class="container-mine">
-            <div class="shop-section">
-                <!-- Додаємо сундуки -->
-                <div class="shop-item" id="coffer1">
-                    <img src="coffer1.png" alt="Простий сундук">
-                    <div class="item-details">
-                        <span class="item-name">Простий</span>
-                    </div>
-                </div>
-                <!-- Додаємо інші сундуки в майбутньому -->
-            </div>
-            <div id="coffer-modal" class="coffer-modal">
-                <div class="modal-content-mine">
-                    <span class="close-modal-mine">&times;</span>
-                    <img id="coffer-image" src="" alt="Простий сундук">
-                    <div class="modal-details">
-                        <div class="price-container">
-                            <img src="coin.png" alt="Coin" class="coin-icon-mine"> <!-- Зображення замість іконки -->
-                            <span id="coffer-price">100</span>
-                        </div>
-                        <button id="open-coffer">Відкрити</button>
-                    </div>
-                </div>
-            </div>
-            <!-- Prize Modal -->
-            <div id="prize-modal" class="prize-modal">
-                <div class="modal-content-mine">
-                    <span class="close-prize-modal">&times;</span>
-                    <div id="prize-description" class="prize-description"></div>
-                    <img id="prize-image" src="" alt="Приз" class="prize-image">
-                    <button id="claim-prize">Забрати</button>
-                </div>
-            </div>
-        </div>  
-        <script src="about.js"></script> <!-- Підключення drop.js тут -->
-    </div>
-    <div id="friendsModal" class="modal-friends">
-        <div class="container-friends">
-
-        </div>    
-    </div>
-    <div id="earnModal" class="modal-earn">
-        <div class="container-earn">
-            
-        </div> 
-    </div>
-    <div id="airdropModal" class="modal-airdrop">
-        <div class="container-globe">
-            <div class="header-globe">
-            </div>
-            <div id="leaderboard" class="leaderboard">
-                <h2>Top 5 Users</h2>
-                <ol id="leaderboardList"></ol>
-            </div>
-        </div>
-        <script src="drop.js"></script> <!-- Підключення drop.js тут -->
-    </div>
-
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-analytics.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>СМТ Великі Бидляки</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
     <script>
-        // Firebase configuration
-        const firebaseConfig = {
-          apiKey: "AIzaSyD6Lt85-CEUGowKkT3yspHghH6D_vBTXmE",
-          authDomain: "lebigaclick.firebaseapp.com",
-          projectId: "lebigaclick",
-          storageBucket: "lebigaclick.appspot.com",
-          messagingSenderId: "796557528130",
-          appId: "1:796557528130:web:a9af8a0ccbe88c30df71db",
-          measurementId: "G-3TXEWH1MHB"
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('main > section');
+            sections.forEach(section => section.style.display = 'none');
+            document.getElementById(sectionId).style.display = 'block';
+        }
+
+        window.onload = () => {
+            showSection('main');
         };
 
-        // Initialize Firebase
+        // Firebase Config
+        const firebaseConfig = {
+            apiKey: "AIzaSyBTKnL2bcIhiywAEq-WKjHWBpOF0fmnUKc",
+            authDomain: "budlyki.firebaseapp.com",
+            projectId: "budlyki",
+            storageBucket: "budlyki.firebasestorage.app",
+            messagingSenderId: "238846067099",
+            appId: "1:238846067099:web:978225bd3013aea1aee13e",
+            measurementId: "G-Z9RZN2Q283"
+        };
+
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
+        const auth = firebase.auth();
+
+        // Реєстрація
+        document.getElementById('register-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const username = document.getElementById('register-username').value;
+            const password = document.getElementById('register-password').value;
+            
+            try {
+                const userCredential = await auth.createUserWithEmailAndPassword(username + "@example.com", password);
+                alert('User registered successfully!');
+                
+                // Додавання користувача до Firestore
+                await db.collection("users").doc(userCredential.user.uid).set({
+                    username: username,
+                    email: userCredential.user.email
+                });
+                
+                // Переходити на головну після реєстрації
+                showSection('main');
+            } catch (error) {
+                alert(error.message);
+            }
+        });
+
+        // Вхід
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const username = document.getElementById('login-username').value;
+            const password = document.getElementById('login-password').value;
+
+            try {
+                const userCredential = await auth.signInWithEmailAndPassword(username + "@example.com", password);
+                alert('Login successful!');
+                
+                // Переходити на головну після входу
+                showSection('main');
+            } catch (error) {
+                alert(error.message);
+            }
+        });
     </script>
-    <script src="script.js"></script>
+</head>
+<body>
+    <header>
+        <h1>СМТ Великі Бидляки</h1>
+        <nav>
+            <a href="#" onclick="showSection('main')">Головна</a>
+            <a href="#" onclick="showSection('history')">Історія</a>
+            <a href="#" onclick="showSection('community')">Громада</a>
+            <a href="#" onclick="showSection('feedback')">Зворотній зв'язок</a>
+            <a href="#" onclick="showSection('news')">Новини</a>
+            <a href="#" onclick="showSection('register')">Реєстрація</a>
+            <a href="#" onclick="showSection('login')">Вхід</a>
+        </nav>
+    </header>
+    <main>
+        <!-- Головна сторінка -->
+        <section id="main">
+            <h2>Ласкаво просимо до СМТ Великі Бидляки!</h2>
+            <p>Ми раді вітати вас на офіційному сайті нашого селища. Тут ви знайдете всю необхідну інформацію про наше СМТ, його розвиток, події та громаду.</p>
+        </section>
+
+        <!-- Сторінка реєстрації -->
+        <section id="register" style="display: none;">
+            <h2>Реєстрація</h2>
+            <div class="form-container">
+                <form id="register-form">
+                    <label for="register-username">Username:</label>
+                    <input type="text" id="register-username" required><br><br>
+                    <label for="register-password">Password:</label>
+                    <input type="password" id="register-password" required><br><br>
+                    <button type="submit">Register</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Сторінка входу -->
+        <section id="login" style="display: none;">
+            <h2>Вхід</h2>
+            <div class="form-container">
+                <form id="login-form">
+                    <label for="login-username">Username:</label>
+                    <input type="text" id="login-username" required><br><br>
+                    <label for="login-password">Password:</label>
+                    <input type="password" id="login-password" required><br><br>
+                    <button type="submit">Login</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Інші сторінки -->
+        <section id="history">
+            <h2>Історія села Великі Бидляки</h2>
+            <p>Великі Бидляки — Селище міського типу в Україні, Звенигородського району Черкаської області. Населення становить 15000 осіб. Голова села - Михайло Лебіга...</p>
+        </section>
+        
+        <section id="community">
+            <h2>Громада</h2>
+            <p>Наша громада складається з активних та відповідальних жителів, які дбають про розвиток селища.</p>
+        </section>
+
+        <section id="feedback">
+            <h2>Зворотній зв'язок</h2>
+            <p>Маєте ідеї або пропозиції? Ми завжди відкриті до діалогу! Залишайте свої повідомлення та побажання.</p>
+        </section>
+
+        <section id="news">
+            <h2>Новини</h2>
+            <p>Тут будуть публікуватися новини нашого селища.</p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 СМТ Великі Бидляки. Всі права захищено.</p>
+    </footer>
 </body>
 </html>
