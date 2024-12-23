@@ -5,162 +5,253 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>СМТ Великі Бидляки</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
-    // Import the functions you need from the SDKs you need
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
-    import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
-    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-analytics.js";
+    <link rel="icon" href="icon-house.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
-    <script>
-        function showSection(sectionId) {
-            const sections = document.querySelectorAll('main > section');
-            sections.forEach(section => section.style.display = 'none');
-            document.getElementById(sectionId).style.display = 'block';
-        }
-
-        window.onload = () => {
-            showSection('main');
-        };
-
-        // Firebase Config
-        const firebaseConfig = {
-            apiKey: "AIzaSyBTKnL2bcIhiywAEq-WKjHWBpOF0fmnUKc",
-            authDomain: "budlyki.firebaseapp.com",
-            projectId: "budlyki",
-            storageBucket: "budlyki.firebasestorage.app",
-            messagingSenderId: "238846067099",
-            appId: "1:238846067099:web:978225bd3013aea1aee13e",
-            measurementId: "G-Z9RZN2Q283"
-        };
-
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
-
-        // Реєстрація
-        document.getElementById('register-form').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            const username = document.getElementById('register-username').value;
-            const password = document.getElementById('register-password').value;
-            
-            try {
-                // Додавання користувача до Firestore (без використання Authentication)
-                await db.collection("users").doc(username).set({
-                    username: username,
-                    password: password
-                });
-                
-                alert('User registered successfully!');
-                
-                // Переходити на головну після реєстрації
-                showSection('main');
-            } catch (error) {
-                alert(error.message);
-            }
-        });
-
-        // Вхід
-        document.getElementById('login-form').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            const username = document.getElementById('login-username').value;
-            const password = document.getElementById('login-password').value;
-
-            try {
-                // Отримання користувача за нікнеймом
-                const userDoc = await db.collection("users").doc(username).get();
-
-                if (userDoc.exists) {
-                    const userData = userDoc.data();
-
-                    // Перевірка пароля
-                    if (userData.password === password) {
-                        alert('Login successful!');
-                        showSection('main');
-                    } else {
-                        alert('Incorrect password!');
-                    }
-                } else {
-                    alert('User not found!');
-                }
-            } catch (error) {
-                alert(error.message);
-            }
-        });
-    </script>
 </head>
 <body>
-    <header>
-        <h1>СМТ Великі Бидляки</h1>
+    <header id="mainHeader">
+        <h1 id="siteTitle">СМТ Великі Бидляки</h1>
         <nav>
             <a href="#" onclick="showSection('main')">Головна</a>
             <a href="#" onclick="showSection('history')">Історія</a>
             <a href="#" onclick="showSection('community')">Громада</a>
-            <a href="#" onclick="showSection('feedback')">Зворотній зв'язок</a>
             <a href="#" onclick="showSection('news')">Новини</a>
-            <a href="#" onclick="showSection('register')">Реєстрація</a>
-            <a href="#" onclick="showSection('login')">Вхід</a>
+            <a href="#" onclick="showSection('feedback')">Зворотній зв'язок</a>
         </nav>
-    </header>
+    </header>    
     <main>
-        <!-- Головна сторінка -->
         <section id="main">
             <h2>Ласкаво просимо до СМТ Великі Бидляки!</h2>
-            <p>Ми раді вітати вас на офіційному сайті нашого селища. Тут ви знайдете всю необхідну інформацію про наше СМТ, його розвиток, події та громаду.</p>
-        </section>
-
-        <!-- Сторінка реєстрації -->
-        <section id="register" style="display: none;">
-            <h2>Реєстрація</h2>
-            <div class="form-container">
-                <form id="register-form">
-                    <label for="register-username">Username:</label>
-                    <input type="text" id="register-username" required><br><br>
-                    <label for="register-password">Password:</label>
-                    <input type="password" id="register-password" required><br><br>
-                    <button type="submit">Register</button>
-                </form>
+            <p>Ми раді вітати вас на офіційному сайті нашого селища. Селище Великі Бидляки — це не просто населений пункт, це справжня громада, яка зберігає свою історію та традиції, але водночас активно розвивається та адаптується до нових викликів сучасного світу.</p>
+        
+            <p>Наше селище знаходиться в Хмельницькій області та є важливим осередком для всіх, хто хоче жити в комфортних умовах і водночас бути частиною прогресивного, дружнього колективу. Ми пишаємося нашими досягненнями в таких сферах, як інфраструктура, екологія, культура та спорт. Завдяки співпраці з місцевими жителями та підприємцями, ми втілюємо проекти, які допомагають покращити якість життя у нашому СМТ.</p>
+        
+            <p>На цьому сайті ви знайдете актуальні новини, інформацію про нашу адміністрацію, значущі події, а також корисні поради для мешканців та гостей. Ми прагнемо, щоб кожен відчував себе частиною великої та дружньої родини Великі Бидляки!</p>
+        
+            <div class="herb-container">
+                <img src="img/gerb.jpg" alt="Герб селища Великі Бидляки" class="gerb-img">
             </div>
-        </section>
-
-        <!-- Сторінка входу -->
-        <section id="login" style="display: none;">
-            <h2>Вхід</h2>
-            <div class="form-container">
-                <form id="login-form">
-                    <label for="login-username">Username:</label>
-                    <input type="text" id="login-username" required><br><br>
-                    <label for="login-password">Password:</label>
-                    <input type="password" id="login-password" required><br><br>
-                    <button type="submit">Login</button>
-                </form>
+        
+            <p><strong>Наш герб</strong> є символом нашої самобутності, сили та єдності. Він відображає багатий історичний спадок селища та його прагнення до розвитку та процвітання.</p>
+        
+            <div class="anthem-container">
+                <h3>Гімн Великих Бидляків</h3>
+                <p>Прослухайте наш офіційний гімн, який об’єднує нас у радості та гордості за наше селище!</p>
+                <div class="custom-audio-player">
+                    <audio controls>
+                        <source src="Misha.mp3" type="audio/mpeg">
+                        Ваш браузер не підтримує аудіо. Завантажте файл <a href="Misha.mp3">тут</a>.
+                    </audio>
+                </div>
+                <p>
+                    <strong>Слова гімну:</strong>  
+                    О, Бидляки, ставайте в ряд,  
+                    Міша Лебіга – наш командир і брат.  
+                    З теплом у серці й піснею в душі,  
+                    Разом ми сила, ми непереможні!
+                </p>
             </div>
-        </section>
+        </section>        
 
-        <!-- Інші сторінки -->
-        <section id="history">
+        <!-- Історія -->
+        <section id="history" style="display: none;">
             <h2>Історія села Великі Бидляки</h2>
-            <p>Великі Бидляки — Селище міського типу в Україні, Звенигородського району Черкаської області. Населення становить 15000 осіб. Голова села - Михайло Лебіга...</p>
+            <p>Великі Бидляки — Селище міського типу в Україні, Баламутівка, Хмельницька область. Населення становить 15000 осіб. Голова села - Михайло Лебіга.</p>
+
+            <h3>Заснування</h3>
+            <p>У 2025 році сталося неймовірне — в самому серці України, на місці старої занедбаної ферми, було засноване село з унікальною назвою — Великі Бидляки. Засновником і ідейним натхненником став харизматичний лідер Михайло Лебіга. Михайло був відомим своєю наполегливістю, креативністю та прагненням зробити щось грандіозне для своєї країни.</p>
+
+            <h3>Село як зразок майбутнього</h3>
+            <p>Село швидко стало прикладом для всієї України. Воно будувалося за найсучаснішими стандартами сталого розвитку: екологічні будинки, сонячні батареї, вітрові електростанції, а також новітні фермерські технології. Жителі займалися вирощуванням органічних продуктів і впровадженням карбонових програм, що зробило село відомим навіть за межами країни.</p>
+
+            <h3>Народження ФК "Великий Бидляк"</h3>
+            <p>Але справжня слава села почалася з моменту створення футбольного клубу "Великий Бидляк". Михайло Лебіга вирішив, що для популяризації села потрібен спортивний прорив. Спочатку це була звичайна аматорська команда, яка тренувалася на сільському стадіоні. Проте з часом клуб став магнітом для найкращих молодих талантів.</p>
+
+            <p>Усе змінилося в 2026 році, коли Кріштіану Роналду, який тоді вже завершував свою кар’єру, несподівано оголосив, що хоче грати саме за "Великий Бидляк". На запитання журналістів, чому він обрав цю команду, Роналду відповів:</p>
+            <blockquote>“Мені подобається пристрасть, з якою тут розвивають футбол. А ще село нагадує мою батьківщину — простих людей із великими мріями”.</blockquote>
+
+            <h3>Чемпіонат світу та тріумф</h3>
+            <p>У 2030 році "Великий Бидляк" шокував увесь світ, вигравши Клубний чемпіонат світу з футболу. Завдяки інноваційному підходу до тренувань, спеціальному харчуванню (органічні продукти з місцевих полів) та легендарному капітану Кріштіану, команда здобула блискавичну перемогу над гігантами світового футболу.</p>
+
+            <p>Після цього клуб став найвпливовішим у світі. Мільйони фанатів з усього світу приїжджали в село, щоб побачити легендарний стадіон "Лебіга Арена", який став символом мрії, що стала реальністю.</p>
+
+            <h3>Спадщина Михайла Лебіги</h3>
+            <p>Михайло Лебіга залишався головою села до кінця свого життя. За його керівництва Великі Бидляки стали світовим символом інновацій, спорту та віри в себе. Його ім’я увійшло в підручники історії як приклад того, що навіть у найскромнішому куточку планети можна створити щось неймовірне.</p>
+
+            <p><strong>Великі Бидляки</strong> — це більше, ніж село. Це легенда, яка нагадує, що мрії не мають меж.</p>
+
+            <!-- Вбудована Google карта -->
+            <div class="map-container">
+                <h3>Місце знаходження села Великі Бидляки</h3>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4120.203137728971!2d27.009200869045177!3d49.30600638338914!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47320f005f2d3479%3A0x22ffb1868fbe4d1d!2z0JLQtdC70LjQutGWINCR0LXQtNC70Y_QutC4!5e1!3m2!1suk!2sua!4v1734964320863!5m2!1suk!2sua" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </section>
+
+
+        <!-- Громада -->
+        <section id="community" style="display: none;">
+            <h2>Громада</h2>
+            <p>Наша громада складається з активних та відповідальних жителів, які прагнуть зробити Великі Бидляки зразковим місцем для життя. Михайло Лебіга, голова селища, є натхненником багатьох важливих змін і реформ, які реалізуються в нашому селищі. Під його керівництвом ми досягли значних успіхів у розвитку інфраструктури, економіки та культурного життя.</p>
+
+            <h3>Лідери громади</h3>
+            
+            <div class="leader">
+                <img src="img/path_to_photo_mykhailo.png" alt="Михайло Лебіга" class="leader-photo">
+                <p22 class="leader-p"><strong>Михайло Лебіга</strong> - голова селища Великі Бидляки, людина, яка втілює в життя численні ініціативи з розвитку нашої громади. Його рішучість і стратегічне бачення дозволили нам стати сучасним і процвітаючим селищем. Михайло постійно працює над покращенням умов для жителів та залученням інвестицій у розвиток села. Крім того, Михайло має деякі свої незвичайні захоплення, як, наприклад, ретуали в туалетах. Він дуже цінує комфорт під час цього процесу і часто включає голосно дабстеп, щоб не чути сторонніх звуків. Цей своєрідний спосіб відпочинку став для нього необхідною частиною щоденних ритуалів.</p>
+            </div>
+
+            <div class="leader">
+                <img src="img/path_to_photo_mykl.png" alt="Майкл Дьяків" class="leader-photo">
+                <p22 class="leader-p"><strong>Майкл Дьяків</strong> - заступник голови, який підтримує роботу голови селища та активно бере участь у реалізації важливих проектів. Майкл відповідає за координацію проектів у сфері освіти, охорони здоров'я та соціального розвитку. Його роль у вирішенні поточних питань та втіленні планів зростання громади важко переоцінити. Майкл пообіцяв з 2027 року не брати хабарі, щоб ефективніше вирішувати важливі питання селища і залишатися чесним та прозорим у своїй діяльності.</p>
+            </div>
+
+            <div class="leader">
+                <img src="img/path_to_photo_tura.png" alt="Тура Хвост" class="leader-photo">
+                <p22 class="leader-p"><strong>Тура Хвост</strong> - голова завгоспу селища, який забезпечує належний стан інфраструктури та житлово-комунальних послуг. Тура разом зі своєю командою працює над ремонтом доріг, організацією прибирання та інших важливих завдань, що покращують якість життя мешканців. Тура також відомий своїм захопленням інвестиціями в криптовалюту, зокрема в монету СМТ. 50% своїх заробітків він вкладає в ремонт та покращення доріг, щоб його розкішне BMW не ламалося і щоб місцеві жителі могли комфортно пересуватися.</p>
+            </div>
+
+            <h3>Депутати селищної ради</h3>
+            <p>У селищній раді працюють депутати, які активно долучаються до розв'язання питань, що стосуються розвитку села:</p>
+            <ul>
+                <li><strong>Олена Ковальчук</strong> - депутат, відповідальна за освіту та культуру. Олена активно працює над розвитком шкіл, організацією культурних заходів та підтримкою місцевих талановитих митців.</li>
+                <li><strong>Іван Петренко</strong> - депутат, який займається питаннями економіки та підприємництва. Іван активно працює над залученням інвестицій в селище та розвитком малого і середнього бізнесу.</li>
+                <li><strong>Тетяна Довбиш</strong> - депутат з екології, яка працює над впровадженням екоініціатив і сталого розвитку. Тетяна організовує акції з озеленення та збереження природних ресурсів.</li>
+                <li><strong>Григорій Сидоренко</strong> - депутат з питань транспорту та інфраструктури. Григорій активно працює над оновленням доріг, транспортних зручностей та покращенням доступності селища для всіх його мешканців.</li>
+            </ul>
+
+            <h3>Спільна робота на благо громади</h3>
+            <p>Ми всі працюємо разом для досягнення спільної мети — розвитку Великі Бидляки та забезпечення гідних умов для життя кожного жителя. Регулярно проводяться збори громади, де ми обговорюємо нагальні питання, впроваджуємо нові ініціативи та плануємо майбутні проекти. Всі рішення приймаються в інтересах кожного члена нашої громади, адже лише разом ми можемо досягти великих результатів.</p>
+
+            <p>Наша громада активно підтримує інновації, екологічні ініціативи, соціальні проекти та культурний розвиток. Ми пишаємося тим, що разом створюємо середовище для розвитку, де кожен може знайти своє місце і внести вклад у загальний успіх.</p>
+        </section>
+
+        <section id="feedback" style="display: none;">
+            <h2>Зворотній зв'язок</h2>
+        
+            <!-- Опис петицій -->
+            <p>Ми завжди раді чути ваші пропозиції та ідеї! Якщо у вас є важливі питання або бажання поділитися петицією до керівництва, будь ласка, заповніть форму. Ваша петиція буде розглянута.</p>
+        
+            <p>Також, ми радіємо спілкуванню в нашому <a href="https://t.me/VELYKI_BYDLYAKY_Chat" target="_blank" class="telegram-link">
+                <i class="fab fa-telegram-plane telegram-icon"></i> Наша бесіда в телеграм чаті</a>
+            </p>
+        
+            <form id="petitionForm">
+                <label for="petitionTitle">Назва петиції:</label>
+                <input type="text" id="petitionTitle" name="petitionTitle" required>
+        
+                <label for="petitionDescription">Опис петиції:</label>
+                <textarea id="petitionDescription" name="petitionDescription" maxlength="200" required></textarea>
+        
+                <label for="petitionAuthor">Від кого:</label>
+                <input type="text" id="petitionAuthor" name="petitionAuthor" required>
+        
+                <button type="submit">Надіслати</button>
+            </form>
+        
+            <!-- Повідомлення про успіх -->
+            <div id="successMessage" class="hidden">Ваше повідомлення додано в чергу!</div>
+        </section>        
+             
+        <section id="news" style="display: none;">
+            <h2>Новини від Бидла</h2>
+            <!-- Новина про Тг бота -->
+            <div class="news-item">
+                <div class="news-text">
+                    <h3>Майкл створив бота для гри у Telegram для всіх Бидляків!</h3>
+                    <p>Майкл, наш місцевий ентузіаст, нещодавно запустив нового Telegram бота, через якого всі жителі Великих Бидляків можуть змагатися та грати різноманітні ігри безкоштовно! Цей бот відкриває нові можливості для розваг і допомагає покращити взаємодію серед мешканців селища.</p>
+                    <p>Тепер кожен може випробувати свої сили в змаганнях за монети! Приєднуйтесь до бота та грайте прямо зараз!</p>
+                    <a href="https://t.me/Leb1gacoin_bot" target="_blank" class="telegram-btn">
+                        Почати гру з ботом
+                    </a>
+                </div>
+                <div class="news-image">
+                    <img src="img/play.jpg" alt="Іконка бота" class="news-image">
+                </div>
+            </div>
+
+            <!-- Новина про погоду у Великі Бидляки -->
+            <div class="news-item">
+                <div class="news-text">
+                    <h3>Погода у Великих Бидляках: температура сьогодні -5°C!</h3>
+                    <p>Великий мороз в селищі! Температура опустилась до -5°C. Вже кілька днів поспіль зберігається низька температура, що підтверджує цей час року як один з найхолодніших за останні роки. Мешканцям рекомендують одягатися тепліше та бути обережними на дорозі через можливі ожеледиці.</p>
+                </div>
+                <div class="weather-widget">
+                    <h4>Погода у Великі Бидляки</h4>
+                    <!-- Вставка віджету погоди від Sinoptik -->
+                    <link rel="stylesheet" href="https://ua.sinoptik.ua/resources/informer/css/informer.css">
+                    <div class="sin-informer sin-informer_font-Arial sin-informer_theme-light" data-lang="uk">
+                        <div class="sin-informer__header">
+                            <a class="sin-informer__logo-link" href="https://ua.sinoptik.ua" target="_blank" rel="nofollow">
+                                <img class="sin-informer__logo-image" width="66" height="20" 
+                                    srcset="https://ua.sinoptik.ua/resources/informer/assets/icons/logo.png, https://ua.sinoptik.ua/resources/informer/assets/icons/logo2x.png 2x" 
+                                    src="https://ua.sinoptik.ua/resources/informer/assets/icons/logo.png" alt="Sinoptik - logo">
+                            </a>
+                            <p class="sin-informer__date">Погода на найближчий час</p>
+                            <p class="sin-informer__time" data-format="24">
+                                <span class="sin-informer__time-icon"></span>
+                            </p>
+                        </div>
+                        <div class="sin-informer__main sin-informer__main_inline">
+                            <a class="sin-informer__entry" href="https://ua.sinoptik.ua/погода-великі-береги" target="_blank" rel="nofollow">
+                                <p class="sin-informer__location"> Великі Бидляки </p>
+                                <div class="sin-informer__primary" style="display: none">
+                                    <p class="sin-informer__local-time"></p>
+                                    <p class="sin-informer__temp" data-unit="c"></p>
+                                    <div class="sin-informer__condition" data-icon-path="https://ua.sinoptik.ua/resources/informer/assets/icons/conditions"></div>
+                                </div>
+                                <div class="sin-informer__secondary" style="display: none">
+                                    <p class="sin-informer__marker sin-informer__marker_wind" data-unit="ms" data-suffix="м/с" data-directions="Західний,Північно-Західний,Північний,Північно-Східний,Східний,Південно-Східний,Південний,Південно-Західний,Штиль" title="Вітер">
+                                        <span class="sin-informer__marker-icon"></span>
+                                    </p>
+                                    <p class="sin-informer__marker sin-informer__marker_humidity" title="Волога">
+                                        <span class="sin-informer__marker-icon"></span>
+                                    </p>
+                                    <p class="sin-informer__marker sin-informer__marker_pressure" data-unit="mm-hg" data-suffix="мм" title="Тиск">
+                                        <span class="sin-informer__marker-icon"></span>
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="sin-informer__footer">
+                            Погода на 10 днів від 
+                            <a class="sin-informer__domain-link" href="https://ua.sinoptik.ua/погода-великі-береги/10-днів" target="_blank" rel="nofollow">
+                                sinoptik.ua
+                            </a>
+                        </div>
+                    </div>
+                    <script src="https://ua.sinoptik.ua/api/informer/content?loc=PSClPSPl2wFUPwPY2MhHbUgv&cem=gKN7CMbagO95gSVYPQDV2nE5GMu4CndxCrPObM3ECMb5CSAS"></script>
+                </div>
+            </div>
+            <!-- Новина про Бидло -->
+            <div class="news-item">
+                <div class="news-text">
+                    <h3>ЖАХ! СПИТЬ та живе з двома ЧОЛОВІКАМИ, маючи четверо ДІТЕЙ! "Говорить Бидло"</h3>
+                    <p>Шокуюче повідомлення з нашого селища! Мешканка Великих Бидляків, яка довгий час була прикладом сімейного щастя, виявилася в центрі уваги місцевих жителів. Виявляється, вона спить та живе з двома чоловіками одночасно, маючи при цьому четверо дітей! Як вона поєднує такі непрості стосунки, розповіли свідки, які бачать це на власні очі.</p>
+                    <p>“Говорить Бидло” – так прокоментували це місцеві, які стверджують, що подібні стосунки вже давно стали звичними для деяких сімей у селищі. Які наслідки для родинного життя будуть в результаті цього, залишиться питанням для обговорення серед громадян нашого селища.</p>
+                </div>
+                <img src="img/govorit.jpg" alt="Жахливі стосунки" class="news-image">
+            </div>
+            
+            <!-- Новина про Монобанк -->
+            <div class="news-item">
+                <div class="news-text">
+                    <h3>У Великих Бидляках відкрився офіс Монобанка!</h3>
+                    <p>Цьому сприяв Майкл, який давно працює над розвитком фінансових послуг у нашому селищі. Тепер мешканці можуть швидко і зручно здійснювати всі необхідні банківські операції без зайвих труднощів!</p>
+                </div>
+                <img src="img/mono.jpg" alt="Монобанк" class="news-image">
+            </div>
         </section>
         
-        <section id="community">
-            <h2>Громада</h2>
-            <p>Наша громада складається з активних та відповідальних жителів, які дбають про розвиток селища.</p>
-        </section>
-
-        <section id="feedback">
-            <h2>Зворотній зв'язок</h2>
-            <p>Маєте ідеї або пропозиції? Ми завжди відкриті до діалогу! Залишайте свої повідомлення та побажання.</p>
-        </section>
-
-        <section id="news">
-            <h2>Новини</h2>
-            <p>Тут будуть публікуватися новини нашого селища.</p>
-        </section>
     </main>
     <footer>
-        <p>&copy; 2024 СМТ Великі Бидляки. Всі права захищено.</p>
-    </footer>
+        <p>
+            <a href="https://www.twitch.tv/leb1ga" target="_blank" style="text-decoration: none; color: inherit;">
+                &copy; 2024 СМТ Великі Бидляки. Всі права захищено.
+            </a>
+        </p>
+    </footer>    
+    <script src="script.js"></script>
 </body>
 </html>
