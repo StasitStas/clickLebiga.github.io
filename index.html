@@ -6,12 +6,12 @@
     <title>СМТ Великі Бидляки</title>
     <link rel="stylesheet" href="styles.css">
     <script type="module">
-        // Імпортуємо функції, необхідні для Firebase
+        // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
-        import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
+        import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-analytics.js";
 
-        // Firebase конфігурація
+        // Your web app's Firebase configuration
         const firebaseConfig = {
             apiKey: "AIzaSyBTKnL2bcIhiywAEq-WKjHWBpOF0fmnUKc",
             authDomain: "budlyki.firebaseapp.com",
@@ -22,23 +22,20 @@
             measurementId: "G-Z9RZN2Q283"
         };
 
-        // Ініціалізація Firebase
+        // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
         const analytics = getAnalytics(app);
 
-        // Показати потрібну секцію
+        // Функція для відображення секцій
         function showSection(sectionId) {
             const sections = document.querySelectorAll('main > section');
-            sections.forEach(section => section.style.display = 'none');  // Сховуємо всі секції
-            const activeSection = document.getElementById(sectionId);
-            if (activeSection) {
-                activeSection.style.display = 'block';  // Показуємо вибрану секцію
-            }
+            sections.forEach(section => section.style.display = 'none');
+            document.getElementById(sectionId).style.display = 'block';
         }
 
         window.onload = () => {
-            showSection('main');  // Відразу показуємо головну сторінку при завантаженні
+            showSection('main');
         };
 
         // Реєстрація
@@ -49,22 +46,26 @@
             const password = document.getElementById('register-password').value;
             
             try {
-                // Перевіряємо, чи вже існує користувач з таким нікнеймом
+                // Перевірка чи існує вже користувач з таким нікнеймом
                 const userDoc = await getDoc(doc(db, "users", username));
-                
+
                 if (userDoc.exists()) {
                     alert('Цей нікнейм вже зайнятий!');
-                } else {
-                    // Додаємо нового користувача в Firestore
-                    await setDoc(doc(db, "users", username), {
-                        username: username,
-                        password: password
-                    });
-                    alert('Реєстрація успішна!');
-                    showSection('main');
+                    return;
                 }
+
+                // Додавання користувача до Firestore
+                await setDoc(doc(db, "users", username), {
+                    username: username,
+                    password: password
+                });
+                
+                alert('Користувач зареєстрований успішно!');
+                
+                // Переходити на головну після реєстрації
+                showSection('main');
             } catch (error) {
-                alert('Помилка при реєстрації: ' + error.message);
+                alert(error.message);
             }
         });
 
@@ -76,11 +77,12 @@
             const password = document.getElementById('login-password').value;
 
             try {
-                // Отримуємо користувача за нікнеймом
+                // Отримання користувача за нікнеймом
                 const userDoc = await getDoc(doc(db, "users", username));
 
                 if (userDoc.exists()) {
                     const userData = userDoc.data();
+
                     // Перевірка пароля
                     if (userData.password === password) {
                         alert('Вхід успішний!');
@@ -89,10 +91,10 @@
                         alert('Невірний пароль!');
                     }
                 } else {
-                    alert('Користувача з таким нікнеймом не існує!');
+                    alert('Користувача з таким нікнеймом не знайдено!');
                 }
             } catch (error) {
-                alert('Помилка при вході: ' + error.message);
+                alert(error.message);
             }
         });
     </script>
@@ -146,22 +148,22 @@
         </section>
 
         <!-- Інші сторінки -->
-        <section id="history" style="display: none;">
+        <section id="history">
             <h2>Історія села Великі Бидляки</h2>
             <p>Великі Бидляки — Селище міського типу в Україні, Звенигородського району Черкаської області. Населення становить 15000 осіб. Голова села - Михайло Лебіга...</p>
         </section>
         
-        <section id="community" style="display: none;">
+        <section id="community">
             <h2>Громада</h2>
             <p>Наша громада складається з активних та відповідальних жителів, які дбають про розвиток селища.</p>
         </section>
 
-        <section id="feedback" style="display: none;">
+        <section id="feedback">
             <h2>Зворотній зв'язок</h2>
             <p>Маєте ідеї або пропозиції? Ми завжди відкриті до діалогу! Залишайте свої повідомлення та побажання.</p>
         </section>
 
-        <section id="news" style="display: none;">
+        <section id="news">
             <h2>Новини</h2>
             <p>Тут будуть публікуватися новини нашого селища.</p>
         </section>
