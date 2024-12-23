@@ -1,551 +1,120 @@
+/* Основні стилі для всього */
 body {
-    font-family: Arial, sans-serif;
-    text-align: center;
+    font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    user-select: none; /* Забороняємо виділення для всього тіла */
-    background-color: #000; /* Чисто чорний фон */
-    overflow: hidden; /* Запобігає вертикальній прокрутці */
-    position: relative;
-    height: 100vh; /* Висота на весь екран */
+    background-color: #f0f0f5;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-image: url('Veluki.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
 }
 
-body * {
-    user-select: none; /* Забороняємо виділення для всіх елементів */
-}
-
-body::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(circle at center bottom, rgb(255 99 71), black 70%); /* Радіальний градієнт */
-    z-index: -1; /* Поміщаємо за контент */
-}
-
-body::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(255, 255, 255, 0.1); /* Напівпрозорий білий шар */
-    backdrop-filter: blur(10px); /* Розмивання для матового ефекту */
-    z-index: -2; /* Поміщаємо за градієнт */
-}
-
-.container {
+/* Заголовок */
+header {
+    background-color: #2c3e50;
+    color: white;
+    padding: 1rem 0;
     text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    position: relative;
-    padding-bottom: 60px; /* Простір для нижньої навігації */
-}
-
-/* ПОчаток навігації */
-.bottom-nav {
-    position: fixed;
-    bottom: 20px;
-    width: 100%;
-    height: 63px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    z-index: 3000; /* Встановлюємо високий z-index */
-    background: none; /* Прибираємо фоновий колір */
-    border: none; /* Прибираємо бордер */
-    box-shadow: none; /* Прибираємо тінь */
-}
-
-.nav-button {
-    position: relative; /* Для створення контексту позиціювання псевдоелемента */
-    color: #888; /* Сірий колір тексту */
-    background: rgba(51, 51, 51, 0.8); /* Легка напівпрозорість */
-    border: none;
-    border-radius: 12px; /* Округлі краї */
-    padding: 12px 18px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: background 0.3s, transform 0.2s;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Тінь */
-    overflow: hidden; /* Прибираємо вихід псевдоелемента за межі кнопки */
-}
-
-.nav-button i {
-    font-size: 24px;
-    margin-bottom: 4px;
-    color: #888; /* Сірий колір іконки */
-}
-
-.nav-button:hover {
-    background: black;
-    transform: translateY(-2px); /* Піднімаємо кнопку при наведенні */
-    color: #fff;
-}
-
-.nav-button:active {
-    background: rgba(34, 34, 34, 0.8); /* Зміна фону при натисканні */
-    transform: translateY(1px); /* Тиснемо кнопку при натисканні */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Зменшуємо тінь при натисканні */
-}
-
-/* КІнець навігації */
-
-.header {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-}
-/* Logo-firstname   */
-.golden-text {
-    color: #6622228f;
-    font-weight: bold;
-    font-size: 1.2em;
-    padding: 8px 20px;
-    border-radius: 25px;
-    background: linear-gradient(135deg, #fddb92, #d1a63b);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: transform 0.2s ease-in-out;
-    display: inline-block;
-    z-index: 2998;
-}
-
-.coin-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
-}
-
-.coin-image {
-    width: 40px;
-    height: 40px;
-    margin-right: 10px;
-}
-
-.click-count {
-    font-size: 3em;
-    font-weight: bold;
-    color: white;
-}
-
-.circle-button {
-    margin-bottom: 20px; /* Adjust this value to move the button up */
-    width: 250px;
-    height: 250px;
-    border: 4px solid #322c2c;
-    border-radius: 50%;
-    padding: 0;
-    cursor: pointer;
-    background: radial-gradient(circle, #5F9EA0 50%, #2e6f72 70%);
-    position: relative;
-    outline: none;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    user-select: none;
-    transition: transform 0.1s ease-out, box-shadow 0.5s;
-    box-shadow: 0 0 10px 5px #333;
-    -webkit-tap-highlight-color: transparent; /* Prevents highlight on Android */
-    -webkit-user-select: none; /* Prevents text selection on iOS Safari */
-    -moz-user-select: none; /* Prevents text selection on Firefox */
-    -ms-user-select: none; /* Prevents text selection on Internet Explorer/Edge */
-}
-
-.circle-button::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border-radius: 50%;
-    background-color: #DDA0DD;
-    opacity: 0;
-    transition: opacity 0.3s ease-out, background-color 0.3s ease-out; /* Додаємо анімацію зміни колірного фону */
-}
-
-.circle-button:active {
-    outline: none; /* Prevents outline on active state */
-    box-shadow: none; /* Removes shadow on active state */
-}
-
-.circle-button img {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    display: block;
-    user-select: none;
-    -webkit-user-drag: none;
-}
-
-.circle-button:active {
-    transform: scale(0.99);
-    box-shadow: 0 0 10px 5px rgba(0, 123, 255, 0.5);
-}
-
-.cog-icon {
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    font-size: 38px;
-    color: white;
-    z-index: 999;
-    cursor: pointer;
-}
-
-.la-telegram {
-    position: fixed;
-    top: 10px;
-    right: 60px;
-    font-size: 38px;
-    color: white;
-    z-index: 999;
-    cursor: pointer;
-}
-
-.globe-icon {
-    position: fixed;
-    top: 110px;
-    right: 10px;
-    font-size: 38px;
-    color: white;
-    z-index: 999;
-    cursor: pointer;
-}
-
-@media (max-width: 600px) {
-    .circle-button {
-        width: 260px;
-        height: 260px;
-        margin-top: 20px;
-    }
-
-    h1 {
-        font-size: 1.5em;
-    }
-
-    .click-count {
-        font-size: 2.5em;
-    }
-}
-
-.click-effect {
-    position: absolute;
-    font-size: 2em;
-    color: #FFFFFF;
-    animation: riseAndFade 1s ease-out;
-    pointer-events: none;
-    user-select: none;
-    touch-action: manipulation;
-}
-
-@keyframes riseAndFade {
-    0% {
-        transform: translateY(0);
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(-30px);
-        opacity: 0;
-    }
-}
-
-.avatar-window {
-    display: none;
-    position: fixed;
+    position: sticky;
     top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0);
-    padding: 0px;
-    border-radius: 0;
-    box-shadow: none;
-    color: white;
-    z-index: 3002; /* Ensure it's above the settings window */
-    overflow: auto;
-}
-
-.avatar-window .close-icon {
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    font-size: 42px;
-    cursor: pointer;
-    color: white;
-}
-
-.avatar-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    background-color: rgba(0, 0, 0, 0.8);
-}
-
-.avatar-title {
-    font-size: 24px;
-    font-weight: bold;
-    color: white;
-}
-
-.settings-window {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0);
-    padding: 0px;
-    border-radius: 0;
-    box-shadow: none;
-    color: white;
-    z-index: 3001;
-    overflow: auto;
-}
-
-.settings-window label {
-    margin-bottom: 10px;
-}
-
-.settings-window .close-icon {
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    font-size: 42px;
-    cursor: pointer;
-    color: white;
-}
-
-.settings-toge {
-    width: 100%;
-}
-
-.settings-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    background-color: rgba(0, 0, 0, 0.8);
-}
-
-.settings-title {
-    font-size: 24px;
-    font-weight: bold;
-    color: white;
-}
-/* Додаємо стилі для нового вікна Telegram */
-.telegram-window {
-    display: none;
-    position: absolute;
-    top: 100px; /* Розташування під вікном налштувань */
-    right: 10px;
-    width: 300px; /* Задаємо ширину */
-    height: 200px; /* Задаємо висоту */
-    background-color: #333;
-    padding: 10px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    color: white;
     z-index: 1000;
 }
 
-.telegram-window button {
-    display: block;
-    width: 100%;
-    margin: 10px 0;
-    padding: 10px;
-    background-color: #0088cc; /* Колір для кнопок */
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    text-align: center;
-}
-
-
-#subscribeButton, #bonusButton {
-    margin-top: 10px;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    background-color: #3E6B70;
-    color: white;
-    cursor: pointer;
-}
-
-#subscribeButton:hover, #bonusButton:hover {
-    background-color: #5F9EA0;
-}
-
-/* Smaller Switch Button */
-
-.switch-label {
+header nav {
+    margin-top: 1rem;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 10px 10px;
-    padding: 10px;
-    border-radius: 10px;
-    background-color: #515152a3;
-}
-
-.switch-label span {
-    margin-right: 10px;
-}
-
-.switch-btn {
-    display: flex;
-    align-items: center;
-}
-
-.switch-btn span {
-    display: flex;
-    align-items: center;
-    width: 46px;
-    height: 24px;
-    border-radius: 15px;
-    background-color: #ddd;
-    transition: 0.3s;
-    padding: 0 2px;
-    position: relative;
-}
-
-.switch-btn span::before {
-    content: '';
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background-color: #fff;
-    position: absolute;
-    left: 2px;
-    transition: 0.6s;
-}
-
-.switch-btn input {
-    display: none;
-}
-
-.switch-btn input:checked ~ span {
-    background-color: #02bcf0;
-}
-
-.switch-btn input:checked ~ span::before {
-    left: 28px;
-}
-
-.status-bar {
-    position: absolute; /* Абсолютне позиціонування */
-    top: 85px; /* Відступ від верху екрану */
-    left: 0; /* Вирівнювання по лівому краю */
-    width: 100%; /* Ширина 100% */
-    display: flex;
-    justify-content: space-between;
-    background-color: rgba(0, 0, 0, 0); /* Повністю прозорий фон */
-    padding: 20px 10px; /* Відступи */
-    box-shadow: 0px -20px 20px rgba(180 180 1 / 24%); /* Жовта тінь вгору і звичайна тінь вниз */
-    box-sizing: border-box; /* Забезпечує правильний підрахунок відступів */
-    border-top-left-radius: 20px; /* Заокруглені краї тільки зверху */
-    border-top-right-radius: 20px; /* Заокруглені краї тільки зверху */
-    border-top: 3px solid #dbb24f; /* Жовта обводка зверху по всій довжині */
-}
-
-.status-item {
-    background-color: #272727; /* Темніше тло для кращого контрасту */
-    color: #fff;
-    padding: 0px; /* Внутрішні відступи */
-    border-radius: 15px; /* Заокруглені краї */
-    text-align: центр;
-    flex: 1;
-    margin: 0 3px; /* Відступи між елементами */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Додаємо тінь */
-    transition: transform 0.3s; /* Анімація при наведенні */
-}
-
-.status-title {
-    display: block;
-    font-size: 16px; /* Збільшуємо розмір шрифту */
-    margin-bottom: 5px;
-    text-transform: uppercase; /* Всі літери великі */
-    letter-spacing: 1px; /* Додаємо відстань між літерами */
-}
-
-.status-value {
-    font-size: 20px; /* Збільшуємо розмір шрифту */
-    font-weight: bold;
-}
-
-
-/* Встановлюємо різні кольори для кожного заголовка */
-.status-item:nth-child(1) .status-title {
-    color: #ff5733; /* Помаранчевий */
-}
-
-.status-item:nth-child(2) .status-title {
-    color: #33ff57; /* Зелений */
-}
-
-.status-item:nth-child(3) .status-title {
-    color: #3357ff; /* Синій */
-}
-/* Level */
-.level-bar-container {
-    position: relative;
-    width: 90%;
-    height: 14px;
-    background-color: #f0f0f0;
-    margin-top: 5%;
-    margin-bottom: -10%;
-    border-radius: 40px;
-}
-
-.level-bar {
-    height: 100%;
-    background-color: #4caf50;
-    width: 0;
-    border-radius: 40px;
-}
-
-.level-text-left, .level-text-right {
-    position: absolute;
-    top: -25px;
-    font-size: 14px;
-}
-
-.level-text-left {
-    left: 0;
-    color: #fff;
-}
-
-.level-text-right {
-    right: 0;
-    color: #fff;
-}
-
-.avatar-content {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
     justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
 }
 
-.avatar-img {
-    width: 100px;  /* Adjust the size as needed */
-    height: 100px; /* Adjust the size as needed */
-    border-radius: 10px; /* Adjust the border-radius for rounded corners */
-    object-fit: cover;
+header nav a {
+    color: #ecf0f1;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    background-color: #34495e;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: background 0.3s, transform 0.2s;
+}
+
+header nav a:hover {
+    background-color: #1abc9c;
+    transform: scale(1.1);
+}
+
+/* Основний контент */
+main {
+    flex: 1;
+    padding: 2rem;
+}
+
+/* Спеціальні стилі для реєстрації та входу */
+section#register, section#login {
+    display: block;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 2rem;
+    border-radius: 10px;
+    margin: auto;
+    max-width: 350px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Модальне вікно для реєстрації та входу */
+.form-container {
+    width: 100%;
+}
+
+.form-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+/* Вхід та реєстрація поля вводу */
+input[type="text"], input[type="password"], input[type="email"] {
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: #f8f8f8;
+}
+
+/* Кнопки для відправки */
+button[type="submit"] {
+    width: 100%;
+    padding: 0.8rem;
+    background-color: #1abc9c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover {
+    background-color: #16a085;
+}
+
+/* Призначення для основних секцій */
+section {
+    display: block;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 2rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+}
+
+/* Призначення для основного контенту */
+footer {
+    background-color: #2c3e50;
+    color: white;
+    text-align: center;
+    padding: 1rem;
 }
