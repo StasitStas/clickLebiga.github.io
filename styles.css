@@ -279,6 +279,62 @@ h2, h3 {
     }
 }
 
+/* Адаптація для мобільних пристроїв */
+@media (max-width: 768px) {
+    #community {
+        padding: 20px 10px; /* Зменшення відступів */
+        border-radius: 0; /* Забираємо закруглення для екранів мобільних */
+        box-shadow: none; /* Забираємо тінь */
+    }
+
+    #community h2 {
+        font-size: 1.8rem; /* Зменшення розміру заголовка */
+        margin-bottom: 15px;
+    }
+
+    #community h3 {
+        font-size: 1.5rem; /* Зменшення розміру підзаголовків */
+        margin-top: 20px;
+        padding-bottom: 5px;
+        margin-bottom: 15px;
+    }
+
+    #community p, #community ul li {
+        font-size: 1rem; /* Зменшення розміру шрифтів */
+        line-height: 1.5; /* Покращення читабельності */
+        margin-bottom: 10px;
+    }
+
+    .leader {
+        flex-direction: column; /* Вирівнювання блоків вертикально */
+        align-items: center; /* Центрування */
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .leader-photo {
+        width: 120px; /* Зменшення розміру фото */
+        height: 120px;
+        margin-bottom: 10px; /* Відступ між фото і текстом */
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Зменшення тіні */
+    }
+
+    .leader-p {
+        font-size: 0.95rem; /* Зменшення розміру тексту */
+        margin: 0 15px; /* Вирівнювання відступів */
+        text-align: center; /* Вирівнювання тексту по центру */
+    }
+
+    #community ul {
+        padding-left: 15px; /* Зменшення відступу для списків */
+    }
+
+    #community ul li {
+        padding: 5px; /* Зменшення внутрішніх відступів */
+    }
+}
+
+
 .custom-audio-player {
     text-align: center;
     margin: 20px 0;
@@ -584,4 +640,67 @@ h2, h3 {
 
 .telegram-btn:hover {
     background-color: #0077b5;
+}
+
+/* Загальний стиль для мобільних пристроїв */
+@media (max-width: 768px) {
+    /* Стиль секції новин */
+    #news {
+        padding: 10px;
+    }
+
+    /* Кожна новина */
+    .news-item {
+        flex-direction: column; /* Переводимо на стовпчики */
+        align-items: flex-start; /* Вирівнюємо текст по лівому краю */
+        padding: 10px;
+    }
+
+    /* Текст новини */
+    .news-text {
+        width: 100%; /* Текст займає всю ширину */
+        margin-bottom: 15px;
+    }
+
+    .news-text h3 {
+        font-size: 18px; /* Зменшуємо шрифт */
+    }
+
+    .news-text p {
+        font-size: 14px;
+    }
+
+    /* Зображення новини */
+    .news-image {
+        width: 100%; /* Зображення на всю ширину */
+        max-width: none; /* Прибираємо обмеження ширини */
+    }
+
+    /* Віджет погоди */
+    .weather-widget {
+        width: 100%; /* Віджет на всю ширину */
+        padding: 10px;
+    }
+
+    .weather-widget h4 {
+        font-size: 16px;
+    }
+
+    .sin-informer__logo-image {
+        width: 50px; /* Зменшуємо логотип */
+    }
+
+    .sin-informer__location {
+        font-size: 1em;
+    }
+
+    .sin-informer__temp {
+        font-size: 1.3em;
+    }
+
+    /* Telegram кнопка */
+    .telegram-btn {
+        font-size: 0.9em;
+        padding: 10px 15px;
+    }
 }
