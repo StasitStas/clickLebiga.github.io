@@ -19,7 +19,6 @@ window.addEventListener('scroll', () => {
     
     // Якщо прокрутили більше ніж на поріг
     if (window.scrollY > threshold) {
-        // Змінюємо позицію хедера, щоб навігаційна панель залишалась зверху
         nav.classList.add('fixed'); // Закріплюємо тільки nav
         h1.style.opacity = '0'; // Заголовок ховається (лише текст)
         header.style.backgroundColor = 'transparent'; // Ховаємо фон хедера
@@ -31,6 +30,44 @@ window.addEventListener('scroll', () => {
         header.style.backgroundColor = 'rgba(44, 62, 80, 0.58)'; // Повертаємо прозорий фон хедера
     }
 });
+
+const menuIcon = document.getElementById('menuIcon');
+const mobileMenu = document.getElementById('mobileMenu');
+
+// Перемикання меню
+menuIcon.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden'); // Перемикаємо клас hidden
+});
+
+// Закриття меню при кліку на пункт меню
+function handleMenuClick(section) {
+    showSection(section); // Виклик функції для зміни секції
+    mobileMenu.classList.add('hidden'); // Закриваємо меню після кліку
+}
+
+// Перевірка видимості елемента desktopNav
+function toggleMenuIconVisibility() {
+    var desktopNav = document.getElementById('desktopNav');
+    var menuIcon = document.getElementById('menuIcon');
+    
+    if (desktopNav && menuIcon) {
+        if (desktopNav.style.display === 'none' || window.getComputedStyle(desktopNav).display === 'none') {
+            // Якщо desktopNav приховано, показуємо іконку меню
+            menuIcon.style.display = 'block';
+        } else {
+            // Якщо desktopNav видно, приховуємо іконку меню
+            menuIcon.style.display = 'none';
+        }
+    }
+}
+
+// Викликаємо функцію при завантаженні сторінки
+window.onload = toggleMenuIconVisibility;
+
+// Викликаємо функцію при зміні видимості desktopNav (якщо потрібно)
+window.addEventListener('resize', toggleMenuIconVisibility);
+
+
 
 // Отримуємо елементи форми та повідомлення
 const petitionForm = document.getElementById('petitionForm');
@@ -60,3 +97,22 @@ petitionDescription.addEventListener('input', function () {
     this.style.height = 'auto';
     this.style.height = (this.scrollHeight) + 'px'; // Підлаштовуємо висоту за кількістю тексту
 });
+
+
+document.querySelectorAll('.ministry-title').forEach(function(title) {
+    title.addEventListener('click', function() {
+        var ministry = title.parentElement;
+        var allMinistries = document.querySelectorAll('.ministry');
+
+        // Закриваємо всі інші міністерства
+        allMinistries.forEach(function(otherMinistry) {
+            if (otherMinistry !== ministry) {
+                otherMinistry.classList.remove('open');
+            }
+        });
+
+        // Перемикаємо стан поточного міністерства
+        ministry.classList.toggle('open');
+    });
+});
+
