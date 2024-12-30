@@ -116,23 +116,46 @@ document.querySelectorAll('.ministry-title').forEach(function(title) {
     });
 });
 
-// Отримуємо елементи
-const audioPlayer = document.querySelector('audio');
-const anthemContainer = document.querySelector('.anthem-container');
+// Отримуємо всі елементи audio
+const audioPlayers = document.querySelectorAll('audio');
+const anthemContainers = document.querySelectorAll('.anthem-container');
 
-// Додаємо слухач для події відтворення
-audioPlayer.addEventListener('play', () => {
-    // Додаємо клас для анімації фону
-    anthemContainer.classList.add('playing');
+// Функція для вимкнення всіх інших аудіо
+function stopOtherTracks(currentAudio) {
+    audioPlayers.forEach(audio => {
+        if (audio !== currentAudio && !audio.paused) {
+            audio.pause(); // Зупинити аудіо
+            audio.currentTime = 0; // Скинути на початок
+            // Видалити клас "playing" для контейнера
+            const container = audio.closest('.anthem-container');
+            container.classList.remove('playing');
+        }
+    });
+}
+
+// Додаємо слухач для події play
+audioPlayers.forEach(audio => {
+    audio.addEventListener('play', (e) => {
+        const currentAudio = e.target;
+        const container = currentAudio.closest('.anthem-container');
+        
+        // Додаємо клас "playing" для контейнера
+        container.classList.add('playing');
+
+        // Зупиняємо всі інші треки
+        stopOtherTracks(currentAudio);
+    });
 });
 
-// Додаємо слухач для події паузи або завершення відтворення
-audioPlayer.addEventListener('pause', () => {
-    // Видаляємо клас для зупинки анімації
-    anthemContainer.classList.remove('playing');
-});
+// Додаємо слухач для події pause та ended
+audioPlayers.forEach(audio => {
+    audio.addEventListener('pause', () => {
+        const container = audio.closest('.anthem-container');
+        container.classList.remove('playing'); // Видаляємо клас "playing"
+    });
 
-audioPlayer.addEventListener('ended', () => {
-    // Видаляємо клас по завершенню відтворення
-    anthemContainer.classList.remove('playing');
+    audio.addEventListener('ended', () => {
+        const container = audio.closest('.anthem-container');
+        container.classList.remove('playing'); // Видаляємо клас "playing"
+    });
 });
