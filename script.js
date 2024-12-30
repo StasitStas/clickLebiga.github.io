@@ -116,3 +116,25 @@ document.querySelectorAll('.ministry-title').forEach(function(title) {
     });
 });
 
+// Отримуємо елементи
+const audioPlayer = document.querySelector('audio');
+const anthemContainer = document.querySelector('.anthem-container');
+
+// Додаємо слухач для події відтворення
+audioPlayer.addEventListener('play', () => {
+    // Додаємо клас для анімації фону
+    anthemContainer.classList.add('playing');
+});
+
+// Додаємо слухач для події паузи або завершення відтворення
+audioPlayer.addEventListener('pause', () => {
+    // Видаляємо клас для зупинки анімації
+    anthemContainer.classList.remove('playing');
+});
+
+audioPlayer.addEventListener('ended', () => {
+    // Видаляємо клас по завершенню відтворення
+    anthemContainer.classList.remove('playing');
+});
+
+
