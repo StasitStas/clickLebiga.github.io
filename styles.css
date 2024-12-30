@@ -476,7 +476,7 @@ h2, h3 {
 }
 
 .anthem-container.playing {
-    background: linear-gradient(135deg, #ffeb3b, #ff5722); /* Зміна кольору при відтворенні */
+    background: linear-gradient(135deg, #fff9c1, #fffe37); /* Зміна кольору при відтворенні */
 }
 
 .custom-audio-player {
