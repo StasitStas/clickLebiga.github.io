@@ -136,5 +136,3 @@ audioPlayer.addEventListener('ended', () => {
     // Видаляємо клас по завершенню відтворення
     anthemContainer.classList.remove('playing');
 });
-
-
