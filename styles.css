@@ -466,30 +466,17 @@ h2, h3 {
     }
 }
 
-
-@keyframes gradient-animation {
-    0% {
-        background: linear-gradient(135deg, #e3ffe7, #d9e7ff);
-    }
-    50% {
-        background: linear-gradient(135deg, #ffeb3b, #ff5722);
-    }
-    100% {
-        background: linear-gradient(135deg, #e3ffe7, #d9e7ff);
-    }
-}
-
 .anthem-container {
     padding: 20px;
     background: linear-gradient(135deg, #e3ffe7, #d9e7ff);
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
     margin-top: 20px;
-    transition: background 1s ease-in-out;
+    transition: background 3s ease-in-out; /* Плавний перехід фону */
 }
 
 .anthem-container.playing {
-    animation: gradient-animation 3s infinite;
+    background: linear-gradient(135deg, #ffeb3b, #ff5722); /* Зміна кольору при відтворенні */
 }
 
 .custom-audio-player {
@@ -519,7 +506,6 @@ h2, h3 {
     color: #333;
     font-size: 1rem;
 }
-
 
 #main {
     padding: 20px;
